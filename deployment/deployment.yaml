@@ -1,0 +1,75 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sre-java
+  labels:
+    app: sre-java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sre-java
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sre-java
+    spec:
+      containers:
+        - name: java-sre-monitor
+          image: 'quay.io/vishwajitdandage/sre:java-1'
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sre-java-svc-monitoring
+spec:
+  ports:
+    - name: 9080-metrics
+      protocol: TCP
+      port: 9080
+      targetPort: 9080
+  selector:
+    app: sre-java
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: test
+spec:
+  to:
+    kind: Service
+    name: sre-java-svc-monitoring
+    weight: 100
+  port:
+    targetPort: 9080-metrics
+---
+
+Route Endpoint -- 
+http://test-java-demo-app.apps.ibmrosa-sp-104.uysv.p1.openshiftapps.com/liberty-metrics/generatelogline?level=error
+
+
+http://test-java-demo-app.apps.ibmrosa-sp-104.uysv.p1.openshiftapps.com/liberty-metrics/actuator/prometheus
+
+http://test-java-demo-app.apps.ibmrosa-sp-104.uysv.p1.openshiftapps.com/liberty-metrics/actuator/
+

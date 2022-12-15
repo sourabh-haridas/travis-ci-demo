@@ -1,0 +1,5 @@
+com\ibm\samplejavaapp\ServletInitializer.class
+com\ibm\samplejavaapp\controller\LogController.class
+com\ibm\samplejavaapp\MetricDemoApplication.class
+com\ibm\samplejavaapp\controller\MetricController.class
+com\ibm\samplejavaapp\controller\MetricController$MetricsType.class
