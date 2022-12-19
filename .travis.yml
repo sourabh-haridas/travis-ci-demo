@@ -1,12 +1,15 @@
 language: java
+
 services:
   - docker
 
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t sourabhapp .
-  - docker run -d -p 8080:9080 sourabhapp
   - docker ps -a
+  
+script:
+  - docker run -d -p 8080:9080 sourabhapp
   
 notifications:
   email: sourabh.h51@gmail.com
