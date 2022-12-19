@@ -7,6 +7,6 @@ before_install:
   - docker build -t sourabhapp .
   - docker run -d -p 8080:9080 sourabhapp
   - docker ps -a
-
-script:
-  - bundle exec rake test
+  
+notifications:
+  email: sourabh.h51@gmail.com
