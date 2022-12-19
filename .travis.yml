@@ -6,7 +6,7 @@ services:
 before_install:
   - docker build -t sourabhapp .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push sourabh51/sourabhapps:1.0
+  - docker push sourabh51/sourabhapp:1.0
   - docker ps -a
   
 script:
