@@ -1,13 +1,12 @@
-language: java
+dist: trusty
 
-services:
-  - docker
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t springbootapp .
+      - docker images
+      - docker tag springbootapp $DOCKER_USERNAME/springbootapp
+      - docker push $DOCKER_USERNAME/springbootapp
 
-before_install:
-  - docker build -t sourabh51/springbootapp:1.0 .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push sourabh51/springbootapp:1.0
-  - docker ps -a
-  
-script:
-  - docker run -d -p 8080:9080 springbootapp:1.0
