@@ -12,4 +12,4 @@ jobs:
       
     - stage: test
       script:
-      - docker run --rm $DOCKER_USERNAME/springbootapp cat hello.txt
+      - docker run --rm $DOCKER_USERNAME/springbootapp echo "This is a sample text" > hello.txt
