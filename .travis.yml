@@ -9,4 +9,7 @@ jobs:
       - docker images
       - docker tag springbootapp $DOCKER_USERNAME/springbootapp
       - docker push $DOCKER_USERNAME/springbootapp
-
+      
+    - stage: test
+      script: docker run --rm $DOCKER_USERNAME/travis-ci-build-stages-demo cat hello.txt
+    - script: docker run --rm $DOCKER_USERNAME/travis-ci-build-stages-demo cat hello.txt
