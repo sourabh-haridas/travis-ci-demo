@@ -8,10 +8,7 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push sourabh51/springbootapp:1.0
   - docker ps -a
-  - docker run sourabh51/springbootapp:1.0 /bin/sh -c "cd /root/springbootapp; bundle exec rake test"
   
 script:
-  - bundle exec rake test
-  
-notifications:
-  email: sourabh.h51@gmail.com
+  - docker run -d -p 8080:9080 springbootapp:1.0
+ 
