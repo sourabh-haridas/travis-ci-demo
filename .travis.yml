@@ -11,5 +11,5 @@ jobs:
       - docker push $DOCKER_USERNAME/springbootapp
       
     - stage: test
-      script: docker run --rm $DOCKER_USERNAME/springbootapp cat hello.txt
-    - script: docker run --rm $DOCKER_USERNAME/springbootapp cat hello.txt
+      script:
+      - docker run --rm $DOCKER_USERNAME/springbootapp cat hello.txt
