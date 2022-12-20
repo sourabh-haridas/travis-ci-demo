@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t sourabh51/springbootapp:1.0
+  - docker build -t sourabh51/springbootapp:1.0 .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push sourabh51/springbootapp:1.0
   - docker ps -a
