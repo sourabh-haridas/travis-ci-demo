@@ -10,5 +10,5 @@ before_install:
   - docker ps -a
   
 script:
+  - ./mvnw clean install
   - docker run -d -p 8080:9080 springbootapp:1.0
- 
