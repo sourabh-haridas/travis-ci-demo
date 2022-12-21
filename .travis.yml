@@ -13,4 +13,5 @@ jobs:
     - stage: test
       script:
       - docker run $DOCKER_USERNAME/springbootapp echo "This is a sample text" > hello.txt
+      - cat hello.txt
       - docker ps -a 
